@@ -1,0 +1,15 @@
+name: PrivateItem
+main: net.starly.privateitem.PrivateItem
+author: Starly Team
+website: http://starly.kr/
+
+description: PrivateItem Plugin.
+
+softdepend: [ ST-Point ]
+
+version: 1.0
+api-version: 1.19
+
+commands:
+  privateitem:
+    aliases: [ 귀속템, 귀속아이템 ]

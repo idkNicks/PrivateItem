@@ -1,0 +1,25 @@
+plugins {
+    id 'java'
+}
+
+group = 'net.starly.killpoint'
+version = '1.0'
+
+repositories {
+    mavenCentral()
+    maven { url = "http://starly.kr:8083/repository/maven-public/"; allowInsecureProtocol = true }
+    maven { url = "https://repo.papermc.io/repository/maven-public/" }
+}
+
+dependencies {
+    compileOnly "org.jetbrains:annotations:23.0.0"
+    compileOnly "org.projectlombok:lombok:1.18.24"
+    annotationProcessor "org.projectlombok:lombok:1.18.24"
+    compileOnly "io.papermc.paper:paper-api:1.19.4-R0.1-SNAPSHOT"
+    compileOnly "net.starly.core:ST-Core:1.7.7"
+
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
