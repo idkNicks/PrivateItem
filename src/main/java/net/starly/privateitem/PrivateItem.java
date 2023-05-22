@@ -5,6 +5,7 @@ import net.starly.privateitem.command.PrivateItemCommand;
 import net.starly.privateitem.context.MessageContent;
 import net.starly.privateitem.listener.*;
 import org.bukkit.command.PluginCommand;
+import org.bukkit.event.Listener;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -37,12 +38,21 @@ public class PrivateItem extends JavaPlugin {
         }
 
         // LISTENER
-        getServer().getPluginManager().registerEvents(new PlayerDeathListener(this), this);
-        getServer().getPluginManager().registerEvents(new PlayerDropItemListener(), this);
-        getServer().getPluginManager().registerEvents(new InventoryClickListener(), this);
-        getServer().getPluginManager().registerEvents(new InventoryDragListener(), this);
-        getServer().getPluginManager().registerEvents(new BlockPlaceListener(), this);
+        registerListeners(
+                new PlayerDeathListener(this),
+                new PlayerDropItemListener(),
+                new InventoryClickListener(),
+                new InventoryDragListener(),
+                new BlockPlaceListener(),
+                new PlayerInteractEntityListener()
+        );
 
+    }
+
+    private void registerListeners(Listener... listeners) {
+        for (Listener listener : listeners) {
+            getServer().getPluginManager().registerEvents(listener, this);
+        }
     }
 
     private boolean isPluginEnable(String pluginName) {

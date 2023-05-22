@@ -23,12 +23,12 @@ public class PrivateItemCommand implements TabExecutor {
         MessageContent content = MessageContent.getMessageContent();
 
         if (!sender.isOp()) {
-            content.getMessageAfterPrefix(MessageType.ERROR, "notAnOperator").ifPresent(message -> sender.sendMessage(message));
+            content.getMessageAfterPrefix(MessageType.ERROR, "notAnOperator").ifPresent(sender::sendMessage);
             return false;
         }
 
         if (args.length == 0) {
-            content.getMessageAfterPrefix(MessageType.ERROR, "wrongCommand").ifPresent(message -> sender.sendMessage(message));
+            content.getMessageAfterPrefix(MessageType.ERROR, "wrongCommand").ifPresent(sender::sendMessage);
             return false;
         }
 
@@ -36,15 +36,15 @@ public class PrivateItemCommand implements TabExecutor {
             case "리로드":
                 PrivateItem.getInstance().reloadConfig();
                 content.initializing(PrivateItem.getInstance().getConfig());
-                content.getMessageAfterPrefix(MessageType.NORMAL, "reloadComplete").ifPresent(message -> sender.sendMessage(message));
+                content.getMessageAfterPrefix(MessageType.NORMAL, "reloadComplete").ifPresent(sender::sendMessage);
                 break;
 
             case "설정":
                 if (sender instanceof Player player) {
                     PrivateItemUtil.setPrivateItem(player);
-                    content.getMessageAfterPrefix(MessageType.NORMAL, "setPrivateItem").ifPresent(message -> sender.sendMessage(message));
+                    content.getMessageAfterPrefix(MessageType.NORMAL, "setPrivateItem").ifPresent(sender::sendMessage);
                 } else {
-                    content.getMessageAfterPrefix(MessageType.ERROR, "noConsoleMessage").ifPresent(message -> sender.sendMessage(message));
+                    content.getMessageAfterPrefix(MessageType.ERROR, "noConsoleMessage").ifPresent(sender::sendMessage);
                 }
                 break;
         }
