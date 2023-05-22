@@ -1,6 +1,7 @@
 package net.starly.privateitem.listener;
 
 import lombok.AllArgsConstructor;
+import net.starly.privateitem.context.MessageType;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -23,7 +24,7 @@ public class PlayerDeathListener extends PrivateItemListener {
         for (ItemStack itemStack : inventory) {
             if (itemStack == null) continue;
 
-            checkNbtTag(itemStack, player, "restorePrivateItem", (result) -> {
+            checkNbtTag(itemStack, player, MessageType.NORMAL,  "restorePrivateItem", (result) -> {
                 if (result) {
                     event.getDrops().remove(itemStack);
                     plugin.getServer().getScheduler().runTaskLater(plugin, () -> player.getInventory().addItem(itemStack), 1L);

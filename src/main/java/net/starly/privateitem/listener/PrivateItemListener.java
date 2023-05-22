@@ -13,7 +13,7 @@ import java.util.function.Consumer;
 
 public abstract class PrivateItemListener implements Listener {
 
-    protected void checkNbtTag(ItemStack itemStack, Player player, String errorMessageKey, Consumer<Boolean> callback) {
+    protected void checkNbtTag(ItemStack itemStack, Player player, MessageType messageType, String errorMessageKey, Consumer<Boolean> callback) {
         if (itemStack == null) return;
 
         ItemStackWrapper itemStackWrapper = NmsItemStackUtil.getInstance().asNMSCopy(itemStack);
@@ -23,7 +23,7 @@ public abstract class PrivateItemListener implements Listener {
         String stringNumber = nbtTagCompoundWrapper.getString("stprivateitem");
         if (stringNumber != null && !stringNumber.isEmpty()) {
             MessageContent content = MessageContent.getMessageContent();
-            content.getMessageAfterPrefix(MessageType.ERROR, errorMessageKey).ifPresent(player::sendMessage);
+            content.getMessageAfterPrefix(messageType, errorMessageKey).ifPresent(player::sendMessage);
             callback.accept(true);
         }
     }

@@ -1,5 +1,6 @@
 package net.starly.privateitem.listener;
 
+import net.starly.privateitem.context.MessageType;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -15,6 +16,6 @@ public class BlockPlaceListener extends PrivateItemListener {
         if (player.getGameMode() == GameMode.CREATIVE) return;
 
         ItemStack itemStack = event.getItemInHand();
-        checkNbtTag(itemStack, player, "noPlacePrivateItem", event::setCancelled);
+        checkNbtTag(itemStack, player, MessageType.ERROR, "noPlacePrivateItem", event::setCancelled);
     }
 }

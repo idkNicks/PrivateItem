@@ -1,5 +1,6 @@
 package net.starly.privateitem.listener;
 
+import net.starly.privateitem.context.MessageType;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -17,7 +18,7 @@ public class InventoryClickListener extends PrivateItemListener {
         ItemStack itemStack = event.isShiftClick() ? event.getCurrentItem() : event.getCursor();
 
         if (!(event.getClickedInventory() instanceof PlayerInventory) || event.isShiftClick()) {
-            checkNbtTag(itemStack, player, "noMovePrivateItem", event::setCancelled);
+            checkNbtTag(itemStack, player, MessageType.ERROR, "noMovePrivateItem", event::setCancelled);
         }
     }
 }

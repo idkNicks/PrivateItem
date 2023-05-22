@@ -1,5 +1,6 @@
 package net.starly.privateitem.listener;
 
+import net.starly.privateitem.context.MessageType;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -14,6 +15,6 @@ public class PlayerDropItemListener extends PrivateItemListener {
         if (player.getGameMode() == GameMode.CREATIVE) return;
 
         ItemStack itemStack = event.getItemDrop().getItemStack();
-        checkNbtTag(itemStack, player, "noDropPrivateItem", event::setCancelled);
+        checkNbtTag(itemStack, player, MessageType.ERROR, "noDropPrivateItem", event::setCancelled);
     }
 }

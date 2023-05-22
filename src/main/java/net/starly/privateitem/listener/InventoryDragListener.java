@@ -1,5 +1,6 @@
 package net.starly.privateitem.listener;
 
+import net.starly.privateitem.context.MessageType;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -22,7 +23,7 @@ public class InventoryDragListener extends PrivateItemListener {
 
         for (Inventory inventory : event.getRawSlots().stream().map(event.getView()::getInventory).collect(Collectors.toSet())) {
             if (!(inventory instanceof PlayerInventory)) {
-                checkNbtTag(itemStack, player, "noMovePrivateItem", (result) -> {
+                checkNbtTag(itemStack, player, MessageType.ERROR, "noMovePrivateItem", (result) -> {
                     if (result) {
                         event.setCancelled(true);
                     }

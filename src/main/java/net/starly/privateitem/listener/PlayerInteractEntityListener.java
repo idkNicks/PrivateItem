@@ -1,5 +1,6 @@
 package net.starly.privateitem.listener;
 
+import net.starly.privateitem.context.MessageType;
 import org.bukkit.GameMode;
 import org.bukkit.entity.ItemFrame;
 import org.bukkit.entity.Player;
@@ -17,7 +18,7 @@ public class PlayerInteractEntityListener extends PrivateItemListener {
         if (player.getGameMode() == GameMode.CREATIVE) return;
 
         ItemStack itemStack = event.getPlayer().getInventory().getItemInMainHand();
-        checkNbtTag(itemStack, player, "noItemFrame", event::setCancelled);
+        checkNbtTag(itemStack, player, MessageType.ERROR, "noItemFrame", event::setCancelled);
     }
 }
 
